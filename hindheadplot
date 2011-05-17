@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+date=${1/.*/}
+
+/usr/bin/gnuplot <<EOF
+
+set datafile separator ","
+set style data lines
+set timefmt "%H:%M:%S"
+set format x "%H:%M"
+set xdata time
+
+set terminal "png"
+set output "$date.png"
+
+plot "$date.txt" using 1:2:(1.0) title "Northbound" \
+          smooth acsplines, \
+     "$date.txt" using 1:3:(1.0) title "Southbound" \
+          smooth acsplines
+
+set terminal "svg"
+set output "$date.svg"
+replot
+
+EOF
