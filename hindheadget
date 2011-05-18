@@ -1,5 +1,5 @@
 DATE=`date -u +%Y%m%d`
 TIME=`date -u +%H:%M:%S`
-DEST="$HOME/hindhead/$DATE.txt"
+DEST="$DATE.txt"
 curl 'http://hindhead.mouchel.com/bbatm/a3/hindhead.jsp' | \
-    awk "( NR == 51 ) { nb=\$1 } ( NR == 60 ) {print \"$TIME,\"nb\",\"\$1}" >> $DEST
+    awk "( NR == 51 ) { nb=\$1 } ( NR == 60 ) {print \"$TIME\t\"nb\"\t\"\$1}" >> $DEST
